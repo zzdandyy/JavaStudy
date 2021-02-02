@@ -9,7 +9,7 @@ public class StatementDemo02 {
         String url = "jdbc:mysql://localhost:3306/school?serverTimezone=UTC";
         String username = "root";
         String password = "aa2217117";
-        String sql = "select * from students";
+        String sql = "select * from school.students";
         Connection conn = null;
         Statement st = null;
         ArrayList<Student> students = new ArrayList<>();

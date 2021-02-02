@@ -10,7 +10,7 @@ public class DruidDemo02 {
         PreparedStatement pstmt = null;
         try {
             conn = JDBCUtils.getConnection();
-            String sql = "insert into account values(null,?,?)";
+            String sql = "insert into school.account values(null,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, "王五");
             pstmt.setDouble(2, 1000);
