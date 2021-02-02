@@ -1,0 +1,7 @@
+div方法出现异常了
+
+异常位置：public void day7.study4.Calculator.div()方法
+异常名称：ArithmeticException
+异常原因：/ by zero
+----------------------------
+本次测试一共出现1处异常
