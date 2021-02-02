@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c3p0-config>
+  <default-config>
+    <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/school?serverTimezone=UTC</property>
+    <property name="user">root</property>
+    <property name="password">aa2217117</property>
+
+<!--    当连接池池初始化时能建立的物理连接的数目-->
+    <property name="initialPoolSize">5</property>
+<!--    连接池池能包含的物理连接的最大数目-->
+    <property name="maxPoolSize">10</property>
+<!--    超时时间-->
+    <property name="checkoutTimeout">3000</property>
+  </default-config>
+
+<!--  自定义的配置，在创建连接池的时候传入name即可-->
+  <named-config name="doublez">
+    <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/school?serverTimezone=UTC</property>
+    <property name="user">doublez</property>
+    <property name="password">aa2217117</property>
+
+    <property name="initialPoolSize">6</property>
+    <property name="maxPoolSize">66</property>
+    <property name="checkoutTimeout">666</property>
+  </named-config>
+</c3p0-config>

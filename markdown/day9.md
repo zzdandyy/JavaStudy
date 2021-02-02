@@ -441,11 +441,205 @@ public class TransferAccountsDemo {
 
 ### 数据库连接池
 
+系统初始化之后，容器被创建，容器中会申请一些连接对象，当数据库访问数据库时，会申请对象，用完之后返还给容器
 
+- 标准接口 DataSource
+
+  获取连接：getConnection();
+
+  归还连接：close(),如果Conncetion对象从连接池获取，不再是关闭连接，而是归还
+
+- 一般我们不需要去实现，由数据库厂商实现
+
+- C3P0：数据库连接池技术
+
+- Druid：数据库连接池实现技术，由阿里巴巴提供
+
+#### C3P0
+
+导入jar包
+
+c3p0-0.9.5.2.jar和mchange-commons-java-0.2.12.jar
+
+定义配置文件
+
+c3p0.properties 或 c3p0-config.xml   放在src目录下
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<c3p0-config>
+  <default-config>
+    <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/school?serverTimezone=UTC</property>
+    <property name="user">root</property>
+    <property name="password">aa2217117</property>
+
+<!--    当连接池池初始化时能建立的物理连接的数目-->
+    <property name="initialPoolSize">5</property>
+<!--    连接池池能包含的物理连接的最大数目-->
+    <property name="maxPoolSize">10</property>
+<!--    超时时间-->
+    <property name="checkoutTimeout">3000</property>
+  </default-config>
+
+<!--  自定义的配置，在创建连接池的时候传入name即可-->
+  <named-config name="doublez">
+    <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/school?serverTimezone=UTC</property>
+    <property name="user">doublez</property>
+    <property name="password">aa2217117</property>
+
+    <property name="initialPoolSize">6</property>
+    <property name="maxPoolSize">66</property>
+    <property name="checkoutTimeout">666</property>
+  </named-config>
+</c3p0-config>
+```
+
+```java
+public class C3P0Demo {
+    public static void main(String[] args) throws SQLException {
+        DataSource ds = new ComboPooledDataSource();
+        Connection conn = ds.getConnection();
+    }
+}
+```
+
+#### Druid
+
+导入jar包
+
+druid-1.1.22.jar
+
+定义配置文件
+
+properties形式，任意名称，任意目录
+
+```properties
+url=jdbc:mysql://localhost:3306/school?serverTimezone=UTC
+username=root
+password=aa2217117
+initialSize=10
+maxActive=20
+maxWait=1000
+filters=wall
+```
+
+```java
+public class DruidDemo {
+    public static void main(String[] args) throws Exception {
+        Properties pro = new Properties();
+        InputStream is = DruidDemo.class.getClassLoader().getResourceAsStream("druid.properties");
+        pro.load(is);
+        System.out.println(pro);
+        DataSource ds = DruidDataSourceFactory.createDataSource(pro);
+        Connection conn = ds.getConnection();
+        System.out.println(conn);
+    }
+}
+```
+
+```java
+public class DruidDemo02 {
+    public static void main(String[] args) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            String sql = "insert into account values(null,?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "王五");
+            pstmt.setDouble(2, 1000);
+            int count = pstmt.executeUpdate();
+            System.out.println(count);
+            JDBCUtils.close(pstmt, conn);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+}
+```
 
 ### Spring JDBC 
 
+Spring框架对JDBC的简单封装
+
 JDBC Template
 
+- 导入jar包
 
+- 创建JdbcTemplate对象，依赖于数据源DataSource
+
+  JdbcTemplate template = new JbdcTemplate(ds);
+
+- 调用方法
+
+```java
+public class JDBCTemplateDemo01 {
+    public static void main(String[] args) {
+        JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+        String sql = "update account set balance = 5000 where id= ? ";
+        int count = template.update(sql, 3);
+        System.out.println(count);
+    }
+}
+```
+
+```java
+public class JDBCTemplateDemo02 {
+    private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
+
+    @Test
+    public void test1() {
+        //修改5号学生的成绩为99
+        template.update("update school.students set score=? where id=?", 99, 5);
+    }
+
+    @Test
+    public void test2() {
+        //添加一条记录
+        template.update("insert into school.students values(null,?,?,?,?)", 2, "小兵", "B", 88);
+    }
+
+    @Test
+    public void tesT3() {
+        //删除刚刚添加的记录
+        template.update("delete from school.students where name=?", "小兵");
+    }
+
+    @Test
+    public void test4() {
+        //查询id为1的记录，封装为Map集合
+        //查询的结果集长度只能是1
+        Map<String, Object> map = template.queryForMap("select * from school.students where id=?", 1);
+        System.out.println(map);
+    }
+
+    @Test
+    public void test5() {
+        //查询所有记录，封装为List集合
+        List<Map<String, Object>> list = template.queryForList("select * from school.students");
+        for (Map<String, Object> stringObjectMap : list) {
+            System.out.println(stringObjectMap);
+        }
+    }
+
+    @Test
+    public void test6() {
+        //查询所有记录，封装为Students对象的List集合
+        // BeanPropertyRowMapper 自动封装，要求类要有默认构造函数
+        List<Student> list = template.query("select * from school.students", new BeanPropertyRowMapper<>(Student.class));
+        for (Student student : list) {
+            System.out.println(student);
+        }
+    }
+
+    @Test
+    public void tesT7() {
+        //查询总记录数
+        Long total = template.queryForObject("select count(id) from school.students", long.class);
+        System.out.println(total);
+    }
+}
+```
 

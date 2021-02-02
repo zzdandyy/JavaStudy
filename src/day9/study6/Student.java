@@ -1,4 +1,4 @@
-package day9.study1;
+package day9.study6;
 
 public class Student {
     private int id;
@@ -7,8 +7,7 @@ public class Student {
     private String gender;
     private int score;
 
-    public Student(){
-    }
+    public Student(){}
 
     public Student(int id, int class_id, String name, String gender, int score) {
         this.id = id;
@@ -57,5 +56,15 @@ public class Student {
     public void setScore(int score) {
         this.score = score;
     }
-}
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", class_id=" + class_id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", score=" + score +
+                '}';
+    }
+}
