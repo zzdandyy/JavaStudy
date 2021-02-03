@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旅游网</title>
+</head>
+<body>
+<!--
+    <form> 采集数据的范围
+    action 提交数据的URL
+    method 提交方式
+        get：请求参数会在地址栏中显示，会封装到请求行中
+             请求参数的长度是有限制的
+             不太安全
+
+        post：请求参数不会在地址里中显示。会封装在请求体中
+              请求参数的长度没有限制
+              较为安全
+-->
+<form action="#" method="get">
+
+    <!--        for 和input的id属性对应，可以获取焦点-->
+    <!--        placeholder 输入框的提示信息-->
+    <label for="username">
+        用户名
+        <input type="text" name="username" placeholder="请输入用户名" id="username">
+    </label><br>
+    <label for="password">
+        密码
+        <input type="password" name="password" placeholder="请输入密码" id="password">
+    </label><br>
+
+    <!--        radio 单选框-->
+    <!--        checked 标注为默认值-->
+    性别 <input type="radio" name="gender" value="man" checked="checked"> 男
+    <!--        两个单选框构成一组，name要一样-->
+    <input type="radio" name="gender" value="female"> 女 <br>
+
+    <!--        复选框-->
+    爱好 <input type="checkbox" name="hobby" value="shopping"> 逛街
+    <input type="checkbox" name="hobby" value="game" checked="checked"> 玩游戏
+    <input type="checkbox" name="hobby" value="study"> 学习 <br>
+
+    <!--        文件选择框-->
+    图片 <input type="file" name="file"><br>
+
+    <!--        隐藏域-->
+    隐藏域 <input type="hidden" name="hidden"><br>
+
+    <!--        图片按钮-->
+    按钮 <input type="button" name="button"><br>
+
+    <!--        图片按钮-->
+    图片按钮 <input type="img" src="image/icon_5.jpg" name="imgbutton"><br>
+
+    <!--        取色器-->
+    取色器 <input type="color" name="color"><br>
+
+    <!--        时间-->
+    时间 <input type="time" name="time"><br>
+
+    <!--        日期-->
+    日期1 <input type="date" name="date"><br>
+
+    <!--        日期-->
+    日期2 <input type="datetime-local" name="datetime_time"><br>
+
+    <!--        下拉列表-->
+    省份 <select name="select">
+    <option id="">请选择</option>
+    <option id="1">广州</option>
+    <option id="2">汕头</option>
+    <option id="3">北京</option>
+    <br>
+
+    <!--        文本框-->
+    自我描述 <textarea cols="10" rows="10"></textarea>
+</select>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>
