@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM_02</title>
+</head>
+<body>
+    <div id="div1">div1</div>
+    <div id="div2">div2</div>
+    <div id="div3">div3</div>
+    <div class="class1">div4</div>
+    <div class="class1">div5</div>
+    <label>
+        <input type="text" name="username">
+    </label>
+
+    <script>
+        let divs = document.getElementsByTagName("div");
+        alert(divs.length);
+        let cls = document.getElementsByClassName("class1");
+        alert(cls.length);
+        let ele_username = document.getElementsByName("username");
+        alert(ele_username.length)
+
+        document.createElement()
+    </script>
+</body>
+</html>

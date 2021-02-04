@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM_03</title>
+</head>
+<body>
+<a>点我试一试</a>
+<button id="but_set">设置属性</button>
+<button id="but_remove">删除属性</button>
+<script>
+    let set_button = document.getElementsByTagName("button")[0];
+    set_button.onclick = function () {
+        let element_a = document.getElementsByTagName("a")[0];
+        //设置属性
+        element_a.setAttribute("href", "https://www.baidu.com")
+    }
+    let remove_button = document.getElementsByTagName("button")[1];
+    remove_button.onclick = function () {
+        let element_a = document.getElementsByTagName("a")[0];
+        // 删除属性
+        element_a.removeAttribute("href");
+    }
+</script>
+</body>
+</html>

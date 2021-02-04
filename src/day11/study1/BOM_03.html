@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM_03</title>
+</head>
+<body>
+    <button id="button1">刷新</button>
+    <button id="button2">百度</button>
+    <script>
+        let btn1 = document.getElementById("button1");
+        btn1.onclick=function (){
+            //刷新页面
+            location.reload();
+        }
+        let btn2 = document.getElementById("button2");
+        btn2.onclick=function (){
+            //重置地址
+            location.href="https://www.baidu.com";
+        }
+    </script>
+</body>
+</html>

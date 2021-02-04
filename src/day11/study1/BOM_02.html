@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM_01</title>
+</head>
+<body>
+<img src="img/banner_1.jpg" id="img" alt="轮播图">
+
+
+<script>
+    let img = document.getElementById("img");
+    let number = 1;
+    setInterval(fun, 3000);
+
+    function fun() {
+        if (number === 4) {
+            number = 1;
+        }
+        img.src = "img/banner_" + number + ".jpg";
+        number++;
+    }
+</script>
+</body>
+</html>

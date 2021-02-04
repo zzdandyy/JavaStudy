@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOM_05</title>
+</head>
+<body>
+<button id="bt1">历史记录个数</button>
+<button id="bt2">前进</button>
+<button id="bt3">后退</button>
+<button id="bt4">去往</button>
+<script>
+    let myhref = location.href;
+    let bt1 = document.getElementById("bt1");
+    let bt2 = document.getElementById("bt2");
+    let bt3 = document.getElementById("bt3");
+    let bt4 = document.getElementById("bt4");
+    bt1.onclick = function () {
+        alert(history.length);
+    }
+    bt2.onclick = function () {
+        history.forward();
+    }
+    bt3.onclick = function () {
+        history.back();
+    }
+    bt3.onclick = function () {
+        //正数：前进几个页面，负数：后退几个页面
+        history.go(2);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM_01</title>
+</head>
+<body>
+<input id="open" type="button" value="打开窗口"><input/>
+<img src="img/off.gif" id="light">
+
+<script>
+    var light = document.getElementById("light");
+    var flog = false;
+    light.onclick = function () {
+        if (!flog) {
+            light.src = "img/on.gif";
+            flog = true;
+        } else {
+            light.src = "img/off.gif";
+            flog = false;
+        }
+    }
+    var flag = confirm("确定要退出吗？");
+    var result = prompt("请输入邀请码");
+
+    var openBtn = document.getElementById("open");
+    openBtn.onclick = function () {
+        open("https://www.baidu.com");
+    }
+
+    //定时器
+    function fun() {
+        alert("boom~~~~")
+    }
+
+    var timeout = setTimeout(fun, 3000);
+    clearTimeout(timeout);
+    var interval = setInterval(fun, 2000);
+    clearInterval(interval);
+</script>
+</body>
+</html>
+
+
+
