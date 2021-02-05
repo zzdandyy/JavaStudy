@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>incident</title>
+    <style>
+        #username {
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        //加载完成事件
+        window.onload = function () {
+            //失去焦点事件
+            document.getElementById("input1").onblur = function () {
+                alert("文本框1失去焦点了");//用于表单校验
+            }
+            //鼠标移到元素上面
+            document.getElementById("input2").onmouseover = function () {
+                alert("鼠标移到文本框2上");
+            }
+            //鼠标被按下
+            document.getElementById("input3").onmousedown = function (event) {
+                //左键，右键，滚轮键都算
+                //左键0，滚轮键1，右键2
+                alert(event.button)
+            }
+            document.getElementById("input4").onkeydown = function (event) {
+                //13是回车
+                if (event.keyCode === 13) {
+                    alert("提交")
+                }
+            }
+            document.getElementById("select").onchange = function () {
+                //一般用于下拉列表
+                alert("改变了")
+            }
+            document.getElementById("form").onsubmit = function () {
+                //校验用户名格式
+                let flag = false;
+                return flag;
+            }
+        }
+    </script>
+</head>
+<body>
+<form action="#" id="form">
+    <input id="input1" name="input1">
+    <input id="input2" name="input2">
+    <input id="input3" name="input3">
+    <input id="input4" name="input4">
+    <select id="select">
+        <option>--请选择--</option>
+        <option>北京</option>
+        <option>广州</option>
+        <option>汕头</option>
+    </select>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>
